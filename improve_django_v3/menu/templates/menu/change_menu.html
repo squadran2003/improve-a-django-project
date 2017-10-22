@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block title %}{{block.super}}| edit | {{menu.season}}{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Change menu</h1>
+            <form action="{% url 'menu:menu_edit' pk=menu.pk%}" method="POST">{% csrf_token %}
+                {{form.as_p}}
+                <input class="btn btn-default" type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+{% endblock %}
