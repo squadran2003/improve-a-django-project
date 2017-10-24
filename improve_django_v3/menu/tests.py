@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from .forms import MenuForm
 from .models import Menu,Item,Ingredient
+import pdb
 
 class MenuItemIngredientModelTest(TestCase):
 
@@ -54,14 +55,14 @@ class MenuViewTests(TestCase):
         ingredient = Ingredient.objects.create(name='milk')
         ingredient.save()
         # creating a new item
-        item = Item.objects.create(
+        self.item = Item.objects.create(
             name='chocolate',
             description='chocolate milk',
             chef = user,
             standard = True
         )
-        item.save()
-        item.ingredients.add(ingredient)
+        self.item.save()
+        self.item.ingredients.add(ingredient)
         #creating a new menu
         self.menu = Menu(
             season='my season',
@@ -69,7 +70,7 @@ class MenuViewTests(TestCase):
 
         )
         self.menu.save()
-        self.menu.items.add(item)
+        self.menu.items.add(self.item)
         self.menu.save()
 
 
@@ -102,15 +103,19 @@ class MenuViewTests(TestCase):
 
     def test_create_new_menu_redirection(self):
         """test that the view redirects correctly in a post request"""
+        items = []
+        for item in self.menu.items.all():
+            items.append(item.pk)
+
 
         response = self.client.post(reverse('menu:menu_new'),{
             'season':self.menu.season,
-            'items':self.menu.items,
+            'items':items,
             'expiration_date':self.menu.expiration_date
         })
-        self.assertEqual(response.status_code,200)
         self.assertRedirects(response,reverse('menu:menu_detail',
-                                                kwargs={'pk':self.menu.pk}))
+                                            kwargs={'pk':self.menu.pk}))
+
 
     def test_edit_menu(self):
         form = MenuForm()
