@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.urlresolvers import reverse
 from django.utils import timezone
 from .models import *
 from .forms import *
@@ -25,7 +26,7 @@ def create_new_menu(request):
         if form.is_valid():
             menu = form.save(commit=False)
             form.save()
-            return redirect('menu_detail', pk=menu.pk)
+            return redirect(reverse('menu:menu_detail', kwargs={'pk':menu.pk}))
     else:
         form = MenuForm()
     return render(request, 'menu/menu_edit.html', {'form': form})
