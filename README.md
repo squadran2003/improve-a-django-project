@@ -2,7 +2,7 @@
 improving a previously built django project
 
 # Motivation
-10th project as part of the Python Web developement
+9th project as part of the Python Web developement
 
 # Installation
 - Create a virtual env that uses Python3 by running the command: virtualenv -p python3 yourdirectory
