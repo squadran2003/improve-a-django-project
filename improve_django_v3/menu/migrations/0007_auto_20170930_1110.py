@@ -17,7 +17,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='menu',
             name='expiration_date',
-            field=models.DateTimeField(default=datetime.datetime(2017, 9, 30, 18, 10, 40, 316864, tzinfo=utc)),
+            field=models.DateTimeField(default=datetime.datetime(
+                                       2017, 9, 30, 18, 10, 40, 316864,
+                                       tzinfo=utc)),
             preserve_default=False,
         ),
     ]
