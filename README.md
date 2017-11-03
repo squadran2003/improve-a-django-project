@@ -15,7 +15,7 @@ improving a previously built django project
 	* pip install -r requirements.txt
 * change directory into improve_django_v3
 * then run python commnad below
-	* manage.py runserver
+	* python manage.py runserver
 
 # Running Tests
 * Navigate to the directory that contains the manage.py file
